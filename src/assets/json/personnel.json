@@ -1,0 +1,34 @@
+[
+  {
+    "name": "曾孟凱",
+    "phone": "0988755604",
+    "idNumber": "k122767371",
+    "position": "工程師",
+    "onboarding": "2018/4/13",
+    "photo": "https://demos.creative-tim.com/vue-argon-dashboard/img/team-2.de26a134.jpg"
+  },
+  {
+    "name": "劉國樑",
+    "phone": "0934331653",
+    "idNumber": "k120116956",
+    "position": "行政人員",
+    "onboarding": "2018/4/13",
+    "photo": "https://demos.creative-tim.com/vue-argon-dashboard/img/team-3.08ced048.jpg"
+  },
+  {
+    "name": "徐文國",
+    "phone": "0932666386",
+    "idNumber": "k121009487",
+    "position": "監工",
+    "onboarding": "2016/6/22",
+    "photo": "https://demos.creative-tim.com/vue-argon-dashboard/img/team-4.53033970.jpg"
+  },
+  {
+    "name": "米里亞姆·埃裡克",
+    "phone": "0987654321",
+    "idNumber": "k112311109",
+    "position": "工頭",
+    "onboarding": "2020/1/1",
+    "photo": "https://demos.creative-tim.com/vue-argon-dashboard/img/team-2.de26a134.jpg"
+  }
+]

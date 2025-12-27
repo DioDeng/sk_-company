@@ -1,0 +1,32 @@
+[
+  {
+    "name": "台北101辦公室翻新工程",
+    "constructionAddress": "台北市信義區信義路5段7號",
+    "constructionDate": "2024-09-01",
+    "temporaryWorkers": [
+      {
+        "name": "王小華",
+        "hourlyRate": 180,
+        "phone": null,
+        "identificationNumber": "A234567890",
+        "temporaryWorkers": [
+          {
+            "hourlyRate": 180,
+            "identificationNumber": "A234567890",
+            "name": "王小華",
+            "phone": "0987654321",
+            "workDays": [
+              {
+                "date": "2024-09-01T00:00:00",
+                "shifts": [
+                  { "startTime": "09:00:00", "endTime": "18:00:00" },
+                  { "startTime": "09:00:00", "endTime": "18:00:00" }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
