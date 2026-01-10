@@ -171,14 +171,12 @@ export default {
 
     async submitCase() {
       this.$emitter.emit('loadingStatus', true);
-      console.log(this.tempCase, '出發');
       try {
         // eslint-disable-next-line no-underscore-dangle
         if (this.tempCase._id) {
           // eslint-disable-next-line no-underscore-dangle
           await apiPutCase(this.tempCase._id, this.tempCase);
         } else {
-          console.log('新增');
           await apiPostCase(this.tempCase);
         }
 

@@ -143,12 +143,19 @@
                 name="時薪"
                 type="text"
                 v-model="tempData.hourlyRate"
+                :rules="validateHourlyRate"
+                class="form-control"
+              />
+              <!-- <VField
+                name="時薪"
+                type="text"
+                v-model="tempData.hourlyRate"
                 :rules="{
                   regex:
                     /^(([^0][0-9]+|0)\.([0-9])$)|^(([^0][0-9]+|0)$)|^(([1-9]+)\.([0-9])$)|^(([1-9]+)$)/,
                 }"
                 class="form-control"
-              />
+              /> -->
               <label for="floatingInput"
                 >時薪
                 <ErrorMessage name="時薪" class="text-danger ms-3" />
@@ -210,11 +217,58 @@ export default {
     };
   },
   methods: {
+    onHourlyRateInput(e) {
+      let { value } = e.target;
+
+      // 只允許數字與小數點
+      value = value.replace(/[^\d.]/g, '');
+
+      // 只允許一個小數點
+      const parts = value.split('.');
+      if (parts.length > 2) {
+        value = `${parts[0]}.${parts[1]}`;
+      }
+
+      // 若超過 2000，直接卡住
+      const num = Number(value);
+      // eslint-disable-next-line no-restricted-globals
+      if (!isNaN(num) && num > 2000) {
+        value = '2000';
+      }
+
+      this.tempData.hourlyRate = value;
+    },
+
+    validateHourlyRate(value) {
+      if (!value) return '請輸入時薪';
+
+      const num = Number(value);
+      // eslint-disable-next-line no-restricted-globals
+      if (isNaN(num)) return '請輸入數字';
+      if (num < 100) return '時薪不能低於 100';
+      if (num > 2000) return '時薪不能超過 2000';
+
+      // 最多兩位小數
+      if (!/^\d+(\.\d{1,2})?$/.test(value)) {
+        return '最多只能到小數點後兩位';
+      }
+
+      return true;
+    },
     isPhone(value) {
       const phoneNumber = /^(09)[0-9]{8}$/;
       return phoneNumber.test(value) ? true : '需要正確的電話號碼';
     },
     addEditWorker() {
+      if (this.tempData.hourlyRate !== undefined) {
+        let num = Number(this.tempData.hourlyRate);
+
+        // eslint-disable-next-line no-restricted-globals
+        if (!isNaN(num)) {
+          num = Math.round(num * 100) / 100; // 四捨五入到 2 位
+          this.tempData.hourlyRate = num.toString();
+        }
+      }
       this.$emitter.emit('loadingStatus', true);
       // eslint-disable-next-line no-underscore-dangle
       if (this.tempData._id) {
