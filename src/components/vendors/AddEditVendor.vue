@@ -65,7 +65,8 @@
                 name="phone"
                 type="text"
                 class="form-control"
-                :class="{ 'is-invalid': errors['電話'] }"
+                :class="{ 'is-invalid': errors['phone'] }"
+                :rules="isPhone"
                 v-model="tempData.phone"
               />
               <label for="phone"
@@ -80,7 +81,6 @@
               <VField
                 name="地址"
                 type="text"
-                rules="required"
                 class="form-control"
                 v-model="tempData.address"
               />
@@ -158,10 +158,15 @@ export default {
     };
   },
   methods: {
-    // isPhone(value) {
-    //   const phoneNumber = /^(09)[0-9]{8}$/;
-    //   return phoneNumber.test(value) ? true : '需要正確的電話號碼';
-    // },
+    isPhone(value) {
+      if (!value) return true;
+
+      const phoneRegex = /^[0-9()+\-\s#extEXT]{6,20}$/;
+      return phoneRegex.test(value)
+        ? true
+        : '電話格式不正確';
+    },
+
     addEditWorker() {
       this.$emitter.emit('loadingStatus', true);
       console.log(this.tempData);

@@ -51,7 +51,7 @@
                 name="phone"
                 type="text"
                 class="form-control"
-                :class="{ 'is-invalid': errors['電話'] }"
+                :class="{ 'is-invalid': errors['phone'] }"
                 :rules="isPhone"
                 v-model="tempData.phone"
               />
@@ -256,9 +256,13 @@ export default {
       return true;
     },
     isPhone(value) {
+      // 沒填 → 直接通過（非必填）
+      if (!value) return true;
+
       const phoneNumber = /^(09)[0-9]{8}$/;
       return phoneNumber.test(value) ? true : '需要正確的電話號碼';
     },
+
     addEditWorker() {
       if (this.tempData.hourlyRate !== undefined) {
         let num = Number(this.tempData.hourlyRate);
