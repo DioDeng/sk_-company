@@ -265,13 +265,19 @@ export default {
 
     addEditWorker() {
       if (this.tempData.hourlyRate !== undefined) {
-        let num = Number(this.tempData.hourlyRate);
+        const num = Number(this.tempData.hourlyRate);
 
         // eslint-disable-next-line no-restricted-globals
-        if (!isNaN(num)) {
-          num = Math.round(num * 100) / 100; // 四捨五入到 2 位
-          this.tempData.hourlyRate = num.toString();
+        if (isNaN(num)) {
+          this.$emitter.emit('messageModal', {
+            status: false,
+            message: '時薪必須是數字',
+          });
+          return;
         }
+
+        // 四捨五入兩位後，保持為 number
+        this.tempData.hourlyRate = Math.round(num * 100) / 100;
       }
       this.$emitter.emit('loadingStatus', true);
       // eslint-disable-next-line no-underscore-dangle
@@ -332,9 +338,20 @@ export default {
       this.modal.show();
     },
     hideModal() {
-      this.tempData = {};
+      this.tempData = {
+        name: '',
+        phone: '',
+        photoUrl: '',
+        seniority: '',
+        hourlyRate: '',
+        entryDate: '',
+        monthlySalary: '',
+        role: '工人',
+        identificationNumber: '',
+      };
       this.modal.hide();
     },
+
   },
   mounted() {
     this.modal = new Modal(this.$refs.addEditWorker);
