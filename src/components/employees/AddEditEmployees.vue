@@ -211,7 +211,7 @@ export default {
         hourlyRate: 0,
         entryDate: '',
         monthlySalary: 10,
-        role: '工人',
+        role: 'worker',
         identificationNumber: '',
       },
     };
@@ -275,11 +275,9 @@ export default {
           });
           return;
         }
-        console.log(this.tempData);
 
         // 四捨五入兩位後，保持為 number
         this.tempData.hourlyRate = Math.round(num * 100) / 100;
-        console.log(this.tempData);
       }
       this.$emitter.emit('loadingStatus', true);
       // eslint-disable-next-line no-underscore-dangle
@@ -300,11 +298,10 @@ export default {
             this.hideModal();
           })
           .catch((err) => {
-            console.log(err);
             this.$emitter.emit('messageModal', {
               status: false,
               message: `修改失敗，原因：${JSON.stringify(
-                err.response.data.errors,
+                err.response.data.error,
               )}`,
             });
             this.$emitter.emit('loadingStatus', false);
@@ -320,11 +317,10 @@ export default {
             this.hideModal();
           })
           .catch((err) => {
-            console.log(err);
             this.$emitter.emit('messageModal', {
               status: false,
               message: `新增失敗，原因：${JSON.stringify(
-                err.response.data.errors,
+                err.response.data.error,
               )}`,
             });
             this.$emitter.emit('loadingStatus', false);
@@ -355,7 +351,7 @@ export default {
         hourlyRate: '',
         entryDate: '',
         monthlySalary: '',
-        role: '工人',
+        role: 'worker',
         identificationNumber: '',
       };
       this.modal.hide();
